@@ -3,37 +3,24 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="他米 TAMI 产品查询系统">
-    <title>产品查询系统 | 他米 TAMI</title>
+    <meta name="description" content="他米地板产品线">
+    <title>他米产品线 | 他米 TAMI</title>
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
-  <body data-page="search">
+  <body data-page="tami" data-brand="他米">
     <header class="site-header">
       <a class="brand-mark" href="index.html" aria-label="他米 TAMI 首页">TAMI</a>
       <nav class="site-nav" aria-label="主导航">
         <a href="index.html">首页</a>
-        <a href="tami.html">他米产品</a>
+        <a href="search.html">产品查询</a>
       </nav>
     </header>
 
     <main class="catalog-page">
-      <section class="page-intro">
-        <p class="eyebrow">Product Catalog</p>
-        <h1>他米地板产品查询</h1>
-        <p>按产品编号、地板品类、木种与空间风格快速检索，所有内容由 <span class="code-text">products.json</span> 自动生成。</p>
-      </section>
-
-      <section class="id-rule-panel" aria-label="产品ID规则">
-        <div>
-          <p class="eyebrow">Product ID Rule</p>
-          <h2>产品 ID = 品类代码 + 木种代码 + 产品号</h2>
-          <p>例：<span class="code-text">S1001</span> = 实木 + 橡木 + 001，图片文件就是 <span class="code-text">S1001.jpg</span>。</p>
-        </div>
-        <dl class="id-rule-list">
-          <div><dt>品类</dt><dd>S 实木 / M 多层实木 / P 3层实木 / L 强化地板</dd></div>
-          <div><dt>木种</dt><dd>1 橡木 / 2 胡桃 / 3 柚木 / 4 枫木</dd></div>
-          <div><dt>产品号</dt><dd>001 起，如 S1001、M2002、P2003、L2004</dd></div>
-        </dl>
+      <section class="page-intro page-intro-compact">
+        <p class="eyebrow">TAMI Flooring Collection</p>
+        <h1>他米地板产品线</h1>
+        <p>自动展示 <span class="code-text">products.json</span> 中品牌为他米的产品，覆盖实木、多层实木、3层实木与强化地板。</p>
       </section>
 
       <section class="toolbar" aria-label="产品筛选">
@@ -54,7 +41,7 @@
         <p id="resultCount">正在读取产品数据...</p>
       </section>
 
-      <section id="productGrid" class="product-grid" aria-label="产品列表"></section>
+      <section id="productGrid" class="product-grid" aria-label="他米产品列表"></section>
     </main>
 
     <div id="productModal" class="modal" aria-hidden="true">
