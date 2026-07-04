@@ -2,16 +2,144 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>山姆仕产品线</title>
+<title>山姆仕产品系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  font-family: Arial;
+  margin:0;
+  background:#f5f5f5;
+}
+
+/* 顶部 */
+.header{
+  background:#111;
+  color:white;
+  padding:40px 20px;
+  text-align:center;
+}
+
+.header h1{
+  margin:0;
+  font-size:36px;
+}
+
+.header p{
+  margin-top:10px;
+  opacity:0.8;
+}
+
+/* 容器 */
+.container{
+  padding:20px;
+  max-width:1000px;
+  margin:auto;
+}
+
+/* 分类区 */
+.section-title{
+  font-size:18px;
+  margin:20px 0 10px;
+  color:#333;
+}
+
+/* 卡片网格 */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+
+/* 产品卡片 */
+.card{
+  background:white;
+  border-radius:10px;
+  padding:15px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+}
+
+/* 图片占位 */
+.img{
+  height:120px;
+  background:#ddd;
+  border-radius:8px;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#666;
+  font-size:14px;
+}
+
+/* 返回 */
+.back{
+  text-align:center;
+  margin:30px;
+}
+
+.back a{
+  text-decoration:none;
+  color:#333;
+}
+</style>
+
 </head>
 
-<body style="font-family:Arial;text-align:center;">
+<body>
 
-<h1>山姆仕产品线</h1>
+<div class="header">
+  <h1>山姆仕产品系统</h1>
+  <p>地板产品展示与查询系统（可扩展版本）</p>
+</div>
 
-<p>这里是山姆仕产品内容页面（后续升级）</p>
+<div class="container">
 
-<a href="index.html">返回首页</a>
+  <div class="section-title">👉 实木复合系列</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="img">图片位（后期替换）</div>
+      <b>橡木浅色系列</b>
+      <p>适合现代 / 极简 / 原木风</p>
+    </div>
+
+    <div class="card">
+      <div class="img">图片位（后期替换）</div>
+      <b>胡桃木深色系列</b>
+      <p>适合轻奢 / 中古风</p>
+    </div>
+
+  </div>
+
+  <div class="section-title">👉 工程款系列</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="img">图片位（后期替换）</div>
+      <b>高耐磨工程地板</b>
+      <p>适合商业 / 工程项目</p>
+    </div>
+
+    <div class="card">
+      <div class="img">图片位（后期替换）</div>
+      <b>强化耐刮系列</b>
+      <p>高性价比通用款</p>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="back">
+  <a href="index.html">← 返回首页</a>
+</div>
 
 </body>
 </html>
