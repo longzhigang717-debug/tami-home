@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>产品查询系统</title>
+
+<style>
+body{
+  font-family: Arial;
+  margin:0;
+  background:#f5f5f5;
+  text-align:center;
+}
+
+input{
+  width:80%;
+  padding:12px;
+  margin-top:20px;
+  font-size:16px;
+}
+
+.card{
+  background:white;
+  margin:15px auto;
+  padding:15px;
+  width:80%;
+  max-width:500px;
+  border-radius:10px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  text-align:left;
+}
+</style>
+</head>
+
+<body>
+
+<h2>产品查询系统</h2>
+
+<input id="searchBox" placeholder="输入关键词：橡木 / 灰色 / 山姆仕">
+
+<div id="result"></div>
+
+<script>
+let data = [];
+
+fetch('products.json')
+.then(res => res.json())
+.then(json => {
+  data = json;
+  render(data);
+});
+
+document.getElementById('searchBox').addEventListener('input', function(){
+  let val = this.value;
+
+  let filtered = data.filter(item =>
+    item.name.includes(val) ||
+    item.brand.includes(val) ||
+    item.keyword.includes(val)
+  );
+
+  render(filtered);
+});
+
+function render(list){
+  let html = '';
+
+  list.forEach(item => {
+    html += `
+      <div class="card">
+        <h3>${item.name}</h3>
+        <p>品牌：${item.brand}</p>
+        <p>规格：${item.spec}</p>
+        <p>风格：${item.style}</p>
+        <p>空间：${item.scene}</p>
+      </div>
+    `;
+  });
+
+  document.getElementById('result').innerHTML = html;
+}
+</script>
+
+</body>
+</html>
