@@ -1,26 +1,16 @@
 [
   {
-    "brand": "他米",
-    "name": "北美橡木·浅灰",
-    "spec": "15mm 三层实木",
-    "style": "现代中古",
-    "scene": "客厅/卧室",
-    "keyword": "橡木 灰色 浅色"
-  },
-  {
-    "brand": "他米",
-    "name": "胡桃木·深咖",
-    "spec": "18mm 实木复合",
-    "style": "轻奢风",
-    "scene": "客厅",
-    "keyword": "胡桃木 深色 咖色"
-  },
-  {
+    "name": "橡木浅色系列",
     "brand": "山姆仕",
-    "name": "白橡木·自然色",
-    "spec": "15mm 三层实木",
-    "style": "北欧风",
-    "scene": "全屋",
-    "keyword": "白橡木 原木 北欧"
+    "category": "家装",
+    "img": "oak.jpg",
+    "desc": "现代 / 极简 / 原木风"
+  },
+  {
+    "name": "胡桃木深色系列",
+    "brand": "山姆仕",
+    "category": "设计师",
+    "img": "walnut.jpg",
+    "desc": "轻奢 / 中古风"
   }
 ]
