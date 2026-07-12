@@ -1,7 +1,9 @@
 (function () {
   var productGrid = document.getElementById("productGrid");
+  var collectionGrid = document.getElementById("collectionGrid");
+  var productDetail = document.getElementById("productDetail");
 
-  if (!productGrid) {
+  if (!productGrid && !collectionGrid && !productDetail) {
     return;
   }
 
@@ -21,6 +23,8 @@
   var modalFinish = document.getElementById("modalFinish");
   var brandScope = document.body.dataset.brand || "";
   var products = [];
+  var dataUrl = "assets/data/products.json";
+  var selectorEnabled = productGrid && searchInput && categoryFilter && resultCount;
 
   var typeCodes = {
     S: "实木",
@@ -40,8 +44,52 @@
     return String(value || "").trim().toLowerCase();
   }
 
+  function productCategory(product) {
+    return product.category || product.collection || "";
+  }
+
+  function storyText(product) {
+    if (!product.story) {
+      return product.description || product.desc || "";
+    }
+
+    if (typeof product.story === "string") {
+      return product.story;
+    }
+
+    return [
+      product.story.materialSource,
+      product.story.designLanguage,
+      product.story.spatialValue
+    ].filter(Boolean).join(" ");
+  }
+
+  function productImageFile(product) {
+    var image = product.image || product.img || product.id;
+
+    if (!image) {
+      return "";
+    }
+
+    if (/\.(jpg|jpeg|png|webp|gif)$/i.test(image)) {
+      return image;
+    }
+
+    return image + ".jpg";
+  }
+
   function imagePath(product) {
-    return "assets/images/" + product.img + ".jpg";
+    var file = productImageFile(product);
+
+    if (!file) {
+      return "";
+    }
+
+    if (/^assets\//.test(file) || /^https?:\/\//.test(file)) {
+      return file;
+    }
+
+    return "assets/images/products/" + file;
   }
 
   function decodeProductId(id) {
@@ -94,18 +142,18 @@
 
     var meta = document.createElement("span");
     meta.className = "product-meta";
-    meta.textContent = product.id + " · " + product.brand + " · " + product.category;
+    meta.textContent = product.collection || productCategory(product);
 
     var title = document.createElement("strong");
     title.textContent = product.name;
 
     var idRule = document.createElement("span");
     idRule.className = "product-id-rule";
-    idRule.textContent = decodeProductId(product.id) || "产品编号";
+    idRule.textContent = [product.wood, product.structure, product.surface].filter(Boolean).join(" · ") || decodeProductId(product.id) || "材料信息";
 
     var desc = document.createElement("span");
     desc.className = "product-desc";
-    desc.textContent = [product.desc, product.scene].filter(Boolean).join(" · ");
+    desc.textContent = [product.style, product.space || product.scene].filter(Boolean).join(" · ");
 
     imageWrap.appendChild(img);
     body.appendChild(meta);
@@ -115,7 +163,9 @@
     card.appendChild(imageWrap);
     card.appendChild(body);
     card.addEventListener("click", function () {
-      openModal(product);
+      if (modal) {
+        openModal(product);
+      }
     });
 
     return card;
@@ -139,13 +189,19 @@
       var searchableText = [
         product.id,
         product.name,
-        product.category,
-        product.desc,
-        product.scene,
+        productCategory(product),
+        product.collection,
+        product.wood,
+        product.structure,
+        product.surface,
+        product.color,
+        product.style,
+        storyText(product),
+        product.space || product.scene,
         product.finish
       ].join(" ");
       var matchesQuery = normalizeText(searchableText).indexOf(query) !== -1;
-      var matchesCategory = category === "all" || product.category === category;
+      var matchesCategory = category === "all" || productCategory(product) === category;
       return matchesQuery && matchesCategory;
     });
   }
@@ -154,14 +210,14 @@
     var currentValue = categoryFilter.value || "all";
     var categories = scopedProducts()
       .map(function (product) {
-        return product.category;
+        return productCategory(product);
       })
       .filter(function (category, index, list) {
         return category && list.indexOf(category) === index;
       })
       .sort();
 
-    categoryFilter.innerHTML = '<option value="all">全部分类</option>';
+    categoryFilter.innerHTML = '<option value="all">全部系列</option>';
     categories.forEach(function (category) {
       var option = document.createElement("option");
       option.value = category;
@@ -181,10 +237,127 @@
     });
 
     if (filteredProducts.length === 0) {
-      productGrid.innerHTML = '<p class="empty-state">没有找到匹配产品，请调整关键词或分类。</p>';
+      productGrid.innerHTML = '<p class="empty-state">暂未找到匹配的材料作品，请尝试更换系列或关键词。</p>';
     }
 
-    resultCount.textContent = "共 " + filteredProducts.length + " 个产品";
+    resultCount.textContent = "呈现 " + filteredProducts.length + " 款材料";
+  }
+
+  function collectionCard(product, index) {
+    var card = document.createElement("a");
+    card.className = "collection-case-card";
+    card.href = "product-detail.html?id=" + encodeURIComponent(product.id);
+    card.setAttribute("aria-label", "查看 " + product.name + " 产品详情");
+
+    var imageWrap = document.createElement("span");
+    imageWrap.className = "collection-case-image";
+
+    var img = document.createElement("img");
+    img.src = imagePath(product);
+    img.alt = product.name;
+    img.loading = "lazy";
+    img.addEventListener("error", function () {
+      handleImageError(img, product);
+    });
+
+    var body = document.createElement("span");
+    body.className = "collection-case-body";
+
+    var number = document.createElement("span");
+    number.className = "collection-case-number";
+    number.textContent = String(index + 1).padStart(2, "0");
+
+    var meta = document.createElement("span");
+    meta.className = "product-meta";
+    meta.textContent = product.wood;
+
+    var title = document.createElement("strong");
+    title.textContent = product.name;
+
+    var desc = document.createElement("span");
+    desc.className = "product-desc";
+    desc.textContent = product.story && product.story.designLanguage ? product.story.designLanguage : storyText(product);
+
+    var link = document.createElement("span");
+    link.className = "collection-case-link";
+    link.textContent = "进入产品详情 →";
+
+    imageWrap.appendChild(img);
+    body.appendChild(number);
+    body.appendChild(meta);
+    body.appendChild(title);
+    body.appendChild(desc);
+    body.appendChild(link);
+    card.appendChild(imageWrap);
+    card.appendChild(body);
+    return card;
+  }
+
+  function renderCollections() {
+    if (!collectionGrid) {
+      return;
+    }
+
+    collectionGrid.innerHTML = "";
+    products.forEach(function (product, index) {
+      collectionGrid.appendChild(collectionCard(product, index));
+    });
+  }
+
+  function productById(id) {
+    return products.filter(function (product) {
+      return product.id === id;
+    })[0];
+  }
+
+  function setText(id, text) {
+    var element = document.getElementById(id);
+
+    if (element) {
+      element.textContent = text || "以产品资料为准";
+    }
+  }
+
+  function renderDetail() {
+    if (!productDetail) {
+      return;
+    }
+
+    var params = new URLSearchParams(window.location.search);
+    var requestedId = params.get("id");
+    var product = productById(requestedId) || products[0];
+
+    if (!product) {
+      productDetail.innerHTML = '<section class="empty-state">暂未找到对应产品。</section>';
+      return;
+    }
+
+    var story = typeof product.story === "object" && product.story ? product.story : {};
+    var image = document.getElementById("detailImage");
+
+    document.title = product.name + " | 他米 TAMI";
+    setText("detailCollection", product.collection);
+    setText("detailName", product.name);
+    setText("detailIntro", [product.wood, product.structure, product.surface, product.color].filter(Boolean).join(" · "));
+    setText("detailMaterialSource", story.materialSource || storyText(product));
+    setText("detailDesignLanguage", story.designLanguage || product.style);
+    setText("detailSpatialValue", story.spatialValue || product.space);
+    setText("detailId", product.id);
+    setText("detailWood", product.wood);
+    setText("detailStructure", product.structure);
+    setText("detailSize", product.size);
+    setText("detailSurface", product.surface);
+    setText("detailColor", product.color);
+    setText("detailSpace", product.space);
+    setText("detailStyle", product.style);
+
+    if (image) {
+      image.src = imagePath(product);
+      image.alt = product.name;
+      image.addEventListener("error", function () {
+        handleImageError(image, product);
+      });
+    }
   }
 
   function openModal(product) {
@@ -194,15 +367,15 @@
       modalImage.removeAttribute("src");
       modalImage.alt = product.name + " 图片待上传";
     };
-    modalMeta.textContent = product.brand + " · " + product.category;
+    modalMeta.textContent = product.collection || productCategory(product);
     modalTitle.textContent = product.name;
-    modalDesc.textContent = product.desc;
+    modalDesc.textContent = storyText(product);
     modalId.textContent = product.id;
-    modalIdRule.textContent = decodeProductId(product.id) || "未匹配编码规则";
-    modalBrand.textContent = product.brand;
-    modalCategory.textContent = product.category;
-    modalScene.textContent = product.scene || "可按项目需求配置";
-    modalFinish.textContent = product.finish || "以实物样板为准";
+    modalIdRule.textContent = product.structure || decodeProductId(product.id) || "以产品资料为准";
+    modalBrand.textContent = "TAMI 他米";
+    modalCategory.textContent = product.collection || product.category;
+    modalScene.textContent = product.space || product.scene || "可按项目需求配置";
+    modalFinish.textContent = product.surface || product.finish || "以实物样板为准";
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("modal-open");
@@ -217,42 +390,60 @@
 
   function validateProducts(items) {
     if (!Array.isArray(items)) {
-      throw new Error("products.json 必须是数组格式");
+      throw new Error("产品资料格式暂不可用");
     }
 
     return items.filter(function (product) {
-      return product.id && product.name && product.brand && product.category && product.img && product.desc;
+      return product.id && product.name && product.collection && product.wood && (product.image || product.img) && storyText(product);
     });
   }
 
-  fetch("products.json")
+  fetch(dataUrl)
     .then(function (response) {
       if (!response.ok) {
-        throw new Error("products.json 读取失败");
+        throw new Error("产品资料暂未加载");
       }
       return response.json();
     })
     .then(function (data) {
       products = validateProducts(data);
-      renderCategories();
-      renderProducts();
+      renderCollections();
+      renderDetail();
+
+      if (selectorEnabled) {
+        renderCategories();
+        renderProducts();
+      }
     })
     .catch(function (error) {
-      productGrid.innerHTML = '<p class="empty-state">产品数据读取失败，请检查 products.json。</p>';
-      resultCount.textContent = error.message;
+      if (productGrid) {
+        productGrid.innerHTML = '<p class="empty-state">产品资料暂未加载，请稍后再试。</p>';
+      }
+
+      if (collectionGrid) {
+        collectionGrid.innerHTML = '<p class="empty-state">产品资料暂未加载，请稍后再试。</p>';
+      }
+
+      if (resultCount) {
+        resultCount.textContent = error.message;
+      }
     });
 
-  searchInput.addEventListener("input", renderProducts);
-  categoryFilter.addEventListener("change", renderProducts);
+  if (selectorEnabled) {
+    searchInput.addEventListener("input", renderProducts);
+    categoryFilter.addEventListener("change", renderProducts);
+  }
 
-  modal.addEventListener("click", function (event) {
-    if (event.target.matches("[data-close-modal]")) {
-      closeModal();
-    }
-  });
+  if (modal) {
+    modal.addEventListener("click", function (event) {
+      if (event.target.matches("[data-close-modal]")) {
+        closeModal();
+      }
+    });
+  }
 
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && modal.classList.contains("is-open")) {
+    if (modal && event.key === "Escape" && modal.classList.contains("is-open")) {
       closeModal();
     }
   });

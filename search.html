@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="他米 TAMI 产品查询系统">
-    <title>产品查询系统 | 他米 TAMI</title>
+    <meta name="description" content="他米 TAMI 专业选型">
+    <title>专业选型 | 他米 TAMI</title>
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body data-page="search">
@@ -12,46 +12,41 @@
       <a class="brand-mark" href="index.html" aria-label="他米 TAMI 首页">TAMI</a>
       <nav class="site-nav" aria-label="主导航">
         <a href="index.html">首页</a>
-        <a href="tami.html">他米产品</a>
+        <a href="products.html">产品中心 Collections</a>
+        <a href="tami.html">关于他米</a>
       </nav>
     </header>
 
-    <main class="catalog-page">
+    <main class="catalog-page brand-catalog-page">
       <section class="page-intro">
-        <p class="eyebrow">Product Catalog</p>
-        <h1>他米地板产品查询</h1>
-        <p>按产品编号、地板品类、木种与空间风格快速检索，所有内容由 <span class="code-text">products.json</span> 自动生成。</p>
+        <p class="eyebrow">Professional Selector</p>
+        <h1>专业选型</h1>
+        <p>服务设计师、经销商、工程客户。</p>
       </section>
 
-      <section class="id-rule-panel" aria-label="产品ID规则">
-        <div>
-          <p class="eyebrow">Product ID Rule</p>
-          <h2>产品 ID = 品类代码 + 木种代码 + 产品号</h2>
-          <p>例：<span class="code-text">S1001</span> = 实木 + 橡木 + 001，图片文件就是 <span class="code-text">S1001.jpg</span>。</p>
-        </div>
-        <dl class="id-rule-list">
-          <div><dt>品类</dt><dd>S 实木 / M 多层实木 / P 3层实木 / L 强化地板</dd></div>
-          <div><dt>木种</dt><dd>1 橡木 / 2 胡桃 / 3 柚木 / 4 枫木</dd></div>
-          <div><dt>产品号</dt><dd>001 起，如 S1001、M2002、P2003、L2004</dd></div>
-        </dl>
+      <section class="collection-overview" aria-label="产品系列">
+        <article><span>01</span><h2>本源 Natural Collection</h2><p>材料本色，生活本真。</p></article>
+        <article><span>02</span><h2>守恒 Stable Collection</h2><p>材料本色，生活本真。</p></article>
+        <article><span>03</span><h2>臻艺 Design Collection</h2><p>材料本色，生活本真。</p></article>
+        <article><span>04</span><h2>恒护 Performance Collection</h2><p>材料本色，生活本真。</p></article>
       </section>
 
       <section class="toolbar" aria-label="产品筛选">
         <label class="search-box">
-          <span>搜索产品 / 编号</span>
-          <input id="searchInput" type="search" placeholder="输入产品名称或ID，如 S1001" autocomplete="off">
+          <span>材料关键词</span>
+          <input id="searchInput" type="search" placeholder="输入木种、色彩、空间或产品编号" autocomplete="off">
         </label>
 
         <label class="select-box">
-          <span>产品分类</span>
+          <span>系列筛选</span>
           <select id="categoryFilter">
-            <option value="all">全部分类</option>
+            <option value="all">全部系列</option>
           </select>
         </label>
       </section>
 
       <section class="catalog-status" aria-live="polite">
-        <p id="resultCount">正在读取产品数据...</p>
+        <p id="resultCount">正在整理材料...</p>
       </section>
 
       <section id="productGrid" class="product-grid" aria-label="产品列表"></section>
@@ -74,7 +69,7 @@
               <dd id="modalId"></dd>
             </div>
             <div>
-              <dt>编码解析</dt>
+              <dt>产品结构</dt>
               <dd id="modalIdRule"></dd>
             </div>
             <div>
@@ -82,7 +77,7 @@
               <dd id="modalBrand"></dd>
             </div>
             <div>
-              <dt>分类</dt>
+              <dt>产品系列</dt>
               <dd id="modalCategory"></dd>
             </div>
             <div>
@@ -90,7 +85,7 @@
               <dd id="modalScene"></dd>
             </div>
             <div>
-              <dt>表面风格</dt>
+              <dt>表面工艺</dt>
               <dd id="modalFinish"></dd>
             </div>
           </dl>
@@ -99,5 +94,21 @@
     </div>
 
     <script src="assets/js/app.js" defer></script>
+    <footer class="site-footer">
+      <div>
+        <strong>TAMI 他米</strong>
+        <p>材料本色，生活本真。</p>
+      </div>
+      <address>
+        <span>联系：contact@tami-flooring.com</span>
+        <span>展厅：中国 · 浙江</span>
+      </address>
+      <nav aria-label="社交入口">
+        <a href="index.html#contact">WeChat</a>
+        <a href="index.html#contact">Instagram</a>
+        <a href="index.html#contact">Xiaohongshu</a>
+      </nav>
+      <p>© 2026 TAMI. All rights reserved.</p>
+    </footer>
   </body>
 </html>
