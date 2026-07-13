@@ -55,5 +55,42 @@
     "space": "门店 / 办公 / 公共动线",
     "description": "柚木天然油脂含量高，纹理舒展而自然，具有良好的稳定性和耐候表现，适合长期高频使用的场景。他米保留柚木原有的暖色调与自然光泽，不做额外高光处理，让材料的耐用性自己呈现。南林适合高频使用的空间——门店、办公、公共动线，色泽随使用时间逐渐显现出属于生活的层次。",
     "image": "TAMI-TEAK-001.jpg"
-  }
+  },
+  {
+  "id": "TAMI-OAK-002",
+  "name": "北岭 HIGHLAND 02",
+  "collection": "北岭 HIGHLAND",
+  "wood": "橡木",
+  "story": {
+    "materialSource": "这里填写材料故事",
+    "designLanguage": "自然秩序",
+    "spatialValue": "客厅、卧室、书房"
+  },
+  "structure": "全桦多层实木",
+  "surface": "哑光木蜡油",
+  "size": "1900 × 190 × 15 mm",
+  "color": "浅橡木色",
+  "style": "自然秩序",
+  "space": "客厅 / 卧室 / 书房",
+  "description": "自然、克制、适合长期居住空间的橡木地板。",
+  "image": "assets/images/products/TAMI-OAK-002.jpg"
+}，{
+  "id": "TAMI-OAK-003",
+  "name": "北岭 HIGHLAND 03",
+  "collection": "北岭 HIGHLAND",
+  "wood": "橡木",
+  "story": {
+    "materialSource": "这里填写材料故事",
+    "designLanguage": "自然秩序",
+    "spatialValue": "客厅、卧室、书房"
+  },
+  "structure": "三层实木",
+  "surface": "哑光木蜡油",
+  "size": "1900 × 190 × 15 mm",
+  "color": "浅橡木色",
+  "style": "自然秩序",
+  "space": "客厅 / 卧室 / 书房",
+  "description": "自然、克制、适合长期居住空间的橡木地板。",
+  "image": "assets/images/products/TAMI-OAK-002.jpg"
+}
 ]
