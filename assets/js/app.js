@@ -9,6 +9,7 @@
 
   var searchInput = document.getElementById("searchInput");
   var categoryFilter = document.getElementById("categoryFilter");
+  var shapeFilter = document.getElementById("shapeFilter");
   var resultCount = document.getElementById("resultCount");
   var modal = document.getElementById("productModal");
   var modalImage = document.getElementById("modalImage");
@@ -46,6 +47,10 @@
 
   function productCategory(product) {
     return product.category || product.collection || "";
+  }
+
+  function productShape(product) {
+    return product.shape || product.productSystem || product.system || "";
   }
 
   function storyText(product) {
@@ -149,11 +154,11 @@
 
     var idRule = document.createElement("span");
     idRule.className = "product-id-rule";
-    idRule.textContent = [product.wood, product.structure, product.surface].filter(Boolean).join(" · ") || decodeProductId(product.id) || "材料信息";
+    idRule.textContent = [product.wood, product.structure, productShape(product)].filter(Boolean).join(" · ") || decodeProductId(product.id) || "材料信息";
 
     var desc = document.createElement("span");
     desc.className = "product-desc";
-    desc.textContent = [product.style, product.space || product.scene].filter(Boolean).join(" · ");
+    desc.textContent = [product.surface, product.space || product.scene].filter(Boolean).join(" · ");
 
     imageWrap.appendChild(img);
     body.appendChild(meta);
@@ -184,6 +189,7 @@
   function activeProducts() {
     var query = normalizeText(searchInput.value);
     var category = categoryFilter.value;
+    var shape = shapeFilter ? shapeFilter.value : "all";
 
     return scopedProducts().filter(function (product) {
       var searchableText = [
@@ -193,6 +199,7 @@
         product.collection,
         product.wood,
         product.structure,
+        productShape(product),
         product.surface,
         product.color,
         product.style,
@@ -202,7 +209,8 @@
       ].join(" ");
       var matchesQuery = normalizeText(searchableText).indexOf(query) !== -1;
       var matchesCategory = category === "all" || productCategory(product) === category;
-      return matchesQuery && matchesCategory;
+      var matchesShape = shape === "all" || productShape(product) === shape;
+      return matchesQuery && matchesCategory && matchesShape;
     });
   }
 
@@ -226,6 +234,33 @@
     });
 
     categoryFilter.value = categories.indexOf(currentValue) === -1 ? "all" : currentValue;
+  }
+
+  function renderShapeFilters() {
+    if (!shapeFilter) {
+      return;
+    }
+
+    var params = new URLSearchParams(window.location.search);
+    var requestedShape = params.get("shape");
+    var currentValue = requestedShape || shapeFilter.value || "all";
+    var shapes = scopedProducts()
+      .map(function (product) {
+        return productShape(product);
+      })
+      .filter(function (shape, index, list) {
+        return shape && list.indexOf(shape) === index;
+      });
+
+    shapeFilter.innerHTML = '<option value="all">全部造型</option>';
+    shapes.forEach(function (shape) {
+      var option = document.createElement("option");
+      option.value = shape;
+      option.textContent = shape;
+      shapeFilter.appendChild(option);
+    });
+
+    shapeFilter.value = shapes.indexOf(currentValue) === -1 ? "all" : currentValue;
   }
 
   function renderProducts() {
@@ -345,6 +380,7 @@
     setText("detailId", product.id);
     setText("detailWood", product.wood);
     setText("detailStructure", product.structure);
+    setText("detailShape", productShape(product));
     setText("detailSize", product.size);
     setText("detailSurface", product.surface);
     setText("detailColor", product.color);
@@ -412,6 +448,7 @@
 
       if (selectorEnabled) {
         renderCategories();
+        renderShapeFilters();
         renderProducts();
       }
     })
@@ -432,6 +469,9 @@
   if (selectorEnabled) {
     searchInput.addEventListener("input", renderProducts);
     categoryFilter.addEventListener("change", renderProducts);
+    if (shapeFilter) {
+      shapeFilter.addEventListener("change", renderProducts);
+    }
   }
 
   if (modal) {

@@ -4,12 +4,14 @@
     "name": "北岭 HIGHLAND",
     "collection": "北岭 HIGHLAND",
     "wood": "橡木",
+    "productSystem": "本源 Natural Collection",
+    "shape": "直条大板",
     "story": {
       "materialSource": "橡木纹理挺直，年轮清晰，木质坚硬，性质稳定，是长期使用中变化最小的材质之一。他米保留橡木原有的浅色调与直纹肌理，不做漂白或做旧处理，让材料保持它本来的秩序感。北岭适合追求自然与经典气质的空间——客厅、卧室、书房，随时间沉淀出更沉静的状态，这是北岭的分量所在。",
       "designLanguage": "自然秩序",
       "spatialValue": "客厅、卧室、书房"
     },
-    "structure": "实木",
+    "structure": "三层实木",
     "surface": "哑光开放木纹",
     "size": "1900 × 190 × 18 mm",
     "color": "浅橡木色",
@@ -23,12 +25,14 @@
     "name": "深谷 RAVINE",
     "collection": "深谷 RAVINE",
     "wood": "胡桃木",
+    "productSystem": "守恒 Stable Collection",
+    "shape": "人字拼",
     "story": {
       "materialSource": "胡桃木色泽深沉，纹理起伏，边材与芯材间存在天然色差，木质细腻、密度均匀。他米不做统一染色，保留每块木材独有的深浅与走向，呈现材料本身的层次与复杂性。深谷适合需要沉稳与时间感的空间——会客区、书房、复式的公共动线，深色调让空间获得重量与静度。",
       "designLanguage": "时间与沉稳",
       "spatialValue": "会客区、书房、复式的公共动线"
     },
-    "structure": "多层实木",
+    "structure": "全桦多层",
     "surface": "深色哑光木纹",
     "size": "1900 × 190 × 15 mm",
     "color": "深胡桃色",
@@ -42,6 +46,8 @@
     "name": "南林 MONSOON",
     "collection": "南林 MONSOON",
     "wood": "柚木",
+    "productSystem": "恒护 Performance Collection",
+    "shape": "商用工程",
     "story": {
       "materialSource": "柚木天然油脂含量高，纹理舒展而自然，具有良好的稳定性和耐候表现，适合长期高频使用的场景。他米保留柚木原有的暖色调与自然光泽，不做额外高光处理，让材料的耐用性自己呈现。南林适合高频使用的空间——门店、办公、公共动线，色泽随使用时间逐渐显现出属于生活的层次。",
       "designLanguage": "温润与耐候",
@@ -57,41 +63,45 @@
     "image": "TAMI-TEAK-001.jpg"
   },
   {
-  "id": "TAMI-OAK-002",
-  "name": "北岭 HIGHLAND 02",
-  "collection": "北岭 HIGHLAND",
-  "wood": "橡木",
-  "story": {
-    "materialSource": "这里填写材料故事",
-    "designLanguage": "自然秩序",
-    "spatialValue": "客厅、卧室、书房"
+    "id": "TAMI-OAK-002",
+    "name": "北岭 HIGHLAND 02",
+    "collection": "北岭 HIGHLAND",
+    "wood": "橡木",
+    "productSystem": "本源 Natural Collection",
+    "shape": "直条大板",
+    "story": {
+      "materialSource": "这里填写材料故事",
+      "designLanguage": "自然秩序",
+      "spatialValue": "客厅、卧室、书房"
+    },
+    "structure": "三层实木",
+    "surface": "哑光木蜡油",
+    "size": "1900 × 190 × 15 mm",
+    "color": "浅橡木色",
+    "style": "自然秩序",
+    "space": "客厅 / 卧室 / 书房",
+    "description": "自然、克制、适合长期居住空间的橡木地板。",
+    "image": "TAMI-OAK-002.jpg"
   },
-  "structure": "三层实木",
-  "surface": "哑光木蜡油",
-  "size": "1900 × 190 × 15 mm",
-  "color": "浅橡木色",
-  "style": "自然秩序",
-  "space": "客厅 / 卧室 / 书房",
-  "description": "自然、克制、适合长期居住空间的橡木地板。",
-  "image": "TAMI-OAK-002.jpg"
-},
   {
-  "id": "TAMI-OAK-003",
-  "name": "北岭 HIGHLAND 03",
-  "collection": "北岭 HIGHLAND",
-  "wood": "橡木",
-  "story": {
-    "materialSource": "这里填写材料故事",
-    "designLanguage": "自然秩序",
-    "spatialValue": "客厅、卧室、书房"
-  },
-  "structure": "三层实木",
-  "surface": "哑光木蜡油",
-  "size": "1900 × 190 × 15 mm",
-  "color": "浅橡木色",
-  "style": "自然秩序",
-  "space": "客厅 / 卧室 / 书房",
-  "description": "自然、克制、适合长期居住空间的橡木地板。",
-  "image": "TAMI-OAK-003.jpg"
-}
+    "id": "TAMI-OAK-003",
+    "name": "北岭 HIGHLAND 03",
+    "collection": "北岭 HIGHLAND",
+    "wood": "橡木",
+    "productSystem": "臻艺 Design Collection",
+    "shape": "异形拼 / 拼花",
+    "story": {
+      "materialSource": "这里填写材料故事",
+      "designLanguage": "自然秩序",
+      "spatialValue": "客厅、卧室、书房"
+    },
+    "structure": "三层实木",
+    "surface": "哑光木蜡油",
+    "size": "1900 × 190 × 15 mm",
+    "color": "浅橡木色",
+    "style": "自然秩序",
+    "space": "客厅 / 卧室 / 书房",
+    "description": "自然、克制、适合长期居住空间的橡木地板。",
+    "image": "TAMI-OAK-003.jpg"
+  }
 ]
