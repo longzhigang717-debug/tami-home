@@ -2164,6 +2164,31 @@ body {
   line-height: 1.28;
 }
 
+.home-page .brand-belief,
+.home-page .home-collections,
+.home-page .brand-cta-panel,
+.home-page .space-inspiration {
+  width: min(100% - 48px, var(--max-width));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-page .brand-belief {
+  margin-top: clamp(72px, 9vw, 132px);
+}
+
+.home-page .home-collections {
+  margin-top: clamp(72px, 9vw, 126px);
+}
+
+.home-page .brand-cta-panel {
+  margin-top: clamp(72px, 8vw, 112px);
+}
+
+.home-page .space-inspiration {
+  margin-top: clamp(72px, 8vw, 112px);
+}
+
 .space-inspiration {
   grid-template-columns: 230px minmax(0, 1fr);
   gap: clamp(28px, 4vw, 44px);
