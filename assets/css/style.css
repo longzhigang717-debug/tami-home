@@ -2069,7 +2069,7 @@ body {
 
 .brand-belief h2 {
   max-width: 520px;
-  font-size: clamp(36px, 4.2vw, 58px);
+  font-size: clamp(29px, 3.4vw, 46px);
   line-height: 1.2;
 }
 
